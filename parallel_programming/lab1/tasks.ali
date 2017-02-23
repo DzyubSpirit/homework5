@@ -1,0 +1,107 @@
+V "GNAT Lib v6"
+P ZX
+
+RN
+RV NO_IO
+RV NO_TASKING
+RV SPARK_05
+RV MAX_TASK_ENTRIES=1
+
+U tasks%b		tasks.adb		5e621afb NE OO PK GE IL
+W ada%s			ada.ads			ada.ali
+W ada.text_io%s		a-textio.adb		a-textio.ali
+
+U tasks%s		tasks.ads		7c323d00 BN EE NE OO PK GE IL
+W ada%s			ada.ads			ada.ali
+W ada.synchronous_task_control%s  a-sytaco.adb	a-sytaco.ali
+W calc_p%s		calc_p.adb		calc_p.ali
+W matrix%s		matrix.adb		matrix.ali
+W vector%s		vector.adb		vector.ali
+
+D ada.ads		20160115095757 3ffc8e18 ada%s
+D a-except.ads		20160115095759 291912d5 ada.exceptions%s
+D a-finali.ads		20160115095759 bf4f806b ada.finalization%s
+D a-ioexce.ads		20160115095800 e4a01f64 ada.io_exceptions%s
+D a-stream.ads		20160115095757 119b8fb3 ada.streams%s
+D a-sytaco.ads		20160115095800 27c816aa ada.synchronous_task_control%s
+D a-tags.ads		20160115095758 01f5e3ef ada.tags%s
+D a-taside.ads		20160115095759 60271635 ada.task_identification%s
+D a-textio.ads		20160115095758 386df5d4 ada.text_io%s
+D a-unccon.ads		20160115095759 f9eb8f06 ada.unchecked_conversion%s
+D calc_p.ads		20170223045218 8221428a calc_p%s
+D interfac.ads		20160115095759 4be8ce1b interfaces%s
+D i-c.ads		20160115095759 5421119b interfaces.c%s
+D i-cstrea.ads		20160115095758 e53d8b8e interfaces.c_streams%s
+D matrix.ads		20170223054117 e73fc97d matrix%s
+D system.ads		20160115095759 6326c08a system%s
+D s-atacco.ads		20160115095757 4c36d12f system.address_to_access_conversions%s
+D s-crtl.ads		20160115095757 0ebbdb71 system.crtl%s
+D s-exctab.ads		20160115095800 54135002 system.exception_table%s
+D s-ficobl.ads		20160115095800 078245e4 system.file_control_block%s
+D s-finroo.ads		20160115095757 4ff27390 system.finalization_root%s
+D s-linux.ads		20160115095759 2fda6ad1 system.linux%s
+D s-multip.ads		20160115095759 38ac9f73 system.multiprocessors%s
+D s-oscons.ads		20161221170807 1dcf75d4 system.os_constants%s
+D s-osinte.ads		20160115095757 64f6e3c7 system.os_interface%s
+D s-parame.ads		20160115095759 7e2a0d7f system.parameters%s
+D s-soflin.ads		20160115095759 14e1eb6c system.soft_links%s
+D s-stache.ads		20160115095759 a37c21ec system.stack_checking%s
+D s-stausa.ads		20160115095800 017a0a05 system.stack_usage%s
+D s-stalib.ads		20160115095800 09bd3940 system.standard_library%s
+D s-stoele.ads		20160115095759 2dc34a04 system.storage_elements%s
+D s-tasinf.ads		20160115095759 2b3f8252 system.task_info%s
+D s-taspri.ads		20160115095759 e3ab4429 system.task_primitives%s
+D s-taskin.ads		20160115095800 0766baa7 system.tasking%s
+D s-traent.ads		20160115095759 005bf670 system.traceback_entries%s
+D s-unstyp.ads		20160115095759 9d58a4c0 system.unsigned_types%s
+D s-wchcon.ads		20160115095759 1b7d22d2 system.wch_con%s
+D tasks.ads		20170222135425 98c9131c tasks%s
+D tasks.adb		20170223055705 fec6fc33 tasks%b
+D vector.ads		20170223032224 a62db341 vector%s
+X 1 ada.ads
+16K9*Ada 19e8 38|1r6 1r40 39|1r6 1r23
+X 6 a-sytaco.ads
+41K13*Synchronous_Task_Control 93e33 38|1w10 1r44
+47R9*Suspension_Object<3|50R9> 84e14 38|10r29 39|5r30
+49U14*Set_True 39|7s7
+X 9 a-textio.ads
+49K13*Text_IO 471e16 39|1w10 1r27
+X 11 calc_p.ads
+5K16 vectorZ[40|3] 38|10r63[6] 10r144[6] 39|5r64[38|6] 5r145[38|6]
+7K16 vectorT[40|3] 38|10r82[6] 39|5r83[38|6]
+10K16 matrixK[15|5] 38|10r101[6] 39|5r102[38|6]
+11K16 matrixR[15|5] 38|10r120[6] 39|5r121[38|6]
+12k11*calc_p 14e11 38|4w6 6r32
+13U13 calc 39|6s16[38|6]
+X 15 matrix.ads
+5k9*matrix 14e11 38|3w6
+7A8 Matrix(40|4A8[11|9[38|6]])<11|6I8[38|6]> 38|10r109[11|10[38|6]] 10r128[11|11[38|6]]
+. 39|5r110[11|10[38|6]] 5r129[11|11[38|6]]
+X 29 s-stausa.ads
+203U14*Initialize 204i<c,__gnat_stack_usage_initialize>22
+268U14*Output_Results 272i<c,__gnat_stack_usage_output_results>22
+X 38 tasks.ads
+6K16 calc_p_i[11|12] 7r7 39|6r7
+8k9*tasks 6z16 12l5 12e10 39|2b14 10l5 10t10
+9T13*calc_part 11l7 11e16 39|3b13 9l7 9t16
+10Y11 start 10=17 10>48 10>60 10>79 10>98 10>117 10<136 39|5b12 8l9 8t14
+10r17 sem{6|47R9} 39|7m16
+10i48 e{integer} 39|6r21
+10a60 Z{40|4A8[11|5[38|6]]} 39|6r24
+10a79 T{40|4A8[11|7[38|6]]} 39|6r27
+10a98 K{15|7A8[11|10[38|6]]} 39|6r30
+10a117 R{15|7A8[11|11[38|6]]} 39|6r33
+10a136 Ah{40|4A8[11|5[38|6]]} 39|6m36
+X 39 tasks.adb
+5r18 sem{6|47R9}
+5i49 e{integer}
+5a61 Z{40|4A8[11|5[38|6]]}
+5a80 T{40|4A8[11|7[38|6]]}
+5a99 K{15|7A8[11|10[38|6]]}
+5a118 R{15|7A8[11|11[38|6]]}
+5a137 Ah{40|4A8[11|5[38|6]]}
+X 40 vector.ads
+3k9*vector 38|2w6 40|10e11
+4A8 Vector(integer)<11|8I8[38|6]> 38|10r71[11|5[38|6]] 10r90[11|7[38|6]]
+. 10r152[11|5[38|6]] 39|5r72[11|5[38|6]] 5r91[11|7[38|6]] 5r153[11|5[38|6]]
+

@@ -1,0 +1,150 @@
+V "GNAT Lib v6"
+P ZX
+
+RN
+RV NO_DIRECT_BOOLEAN_OPERATORS
+RV NO_IO
+RV SPARK_05
+
+U lib%b			lib.adb			df1ae157 NE OO PK IL
+W ada%s			ada.ads			ada.ali
+W ada.synchronous_task_control%s  a-sytaco.adb	a-sytaco.ali
+W ada.text_io%s		a-textio.adb		a-textio.ali
+
+U lib%s			lib.ads			d04e41a2 BN EE NE OO PK IL
+W ada%s			ada.ads			ada.ali
+W ada.synchronous_task_control%s  a-sytaco.adb	a-sytaco.ali
+Z ada.text_io%s		a-textio.adb		a-textio.ali
+W matrix%s		matrix.adb		matrix.ali
+W vector%s		vector.adb		vector.ali
+
+D ada.ads		20160115095757 3ffc8e18 ada%s
+D a-except.ads		20160115095759 291912d5 ada.exceptions%s
+D a-finali.ads		20160115095759 bf4f806b ada.finalization%s
+D a-ioexce.ads		20160115095800 e4a01f64 ada.io_exceptions%s
+D a-stream.ads		20160115095757 119b8fb3 ada.streams%s
+D a-sytaco.ads		20160115095800 27c816aa ada.synchronous_task_control%s
+D a-tags.ads		20160115095758 01f5e3ef ada.tags%s
+D a-taside.ads		20160115095759 60271635 ada.task_identification%s
+D a-textio.ads		20160115095758 386df5d4 ada.text_io%s
+D a-unccon.ads		20160115095759 f9eb8f06 ada.unchecked_conversion%s
+D interfac.ads		20160115095759 4be8ce1b interfaces%s
+D i-c.ads		20160115095759 5421119b interfaces.c%s
+D i-cstrea.ads		20160115095758 e53d8b8e interfaces.c_streams%s
+D lib.ads		20170223054654 b6942d34 lib%s
+D lib.adb		20170223054701 762b2f1d lib%b
+D matrix.ads		20170223054117 e73fc97d matrix%s
+D system.ads		20160115095759 6326c08a system%s
+D s-atacco.ads		20160115095757 4c36d12f system.address_to_access_conversions%s
+D s-crtl.ads		20160115095757 0ebbdb71 system.crtl%s
+D s-exctab.ads		20160115095800 54135002 system.exception_table%s
+D s-ficobl.ads		20160115095800 078245e4 system.file_control_block%s
+D s-finroo.ads		20160115095757 4ff27390 system.finalization_root%s
+D s-linux.ads		20160115095759 2fda6ad1 system.linux%s
+D s-multip.ads		20160115095759 38ac9f73 system.multiprocessors%s
+D s-oscons.ads		20161221170807 1dcf75d4 system.os_constants%s
+D s-osinte.ads		20160115095757 64f6e3c7 system.os_interface%s
+D s-parame.ads		20160115095759 7e2a0d7f system.parameters%s
+D s-soflin.ads		20160115095759 14e1eb6c system.soft_links%s
+D s-stache.ads		20160115095759 a37c21ec system.stack_checking%s
+D s-stausa.ads		20160115095800 017a0a05 system.stack_usage%s
+D s-stalib.ads		20160115095800 09bd3940 system.standard_library%s
+D s-stoele.ads		20160115095759 2dc34a04 system.storage_elements%s
+D s-tasinf.ads		20160115095759 2b3f8252 system.task_info%s
+D s-taspri.ads		20160115095759 e3ab4429 system.task_primitives%s
+D s-taskin.ads		20160115095800 0766baa7 system.tasking%s
+D s-traent.ads		20160115095759 005bf670 system.traceback_entries%s
+D s-unstyp.ads		20160115095759 9d58a4c0 system.unsigned_types%s
+D s-wchcon.ads		20160115095759 1b7d22d2 system.wch_con%s
+D vector.ads		20170223032224 a62db341 vector%s
+D vector.adb		20170222174841 3296f89d vector%b
+X 1 ada.ads
+16K9*Ada 19e8 14|1r6 1r40 15|1r6 1r40 2r6 2r23
+X 6 a-sytaco.ads
+41K13*Synchronous_Task_Control 93e33 14|1w10 1r44 15|1w10 1r44
+X 9 a-textio.ads
+49K13*Text_IO 471e16 15|2w10 2r27
+X 14 lib.ads
+4K9*lib 46l5 46e8 15|3b14 71l5 71t8
+6I10 IndexI 8r63 9r41
+7I10 IndexO 8r48 10r41
+8V19 convert{6I10} 8>27 8>43 15|8s21
+8i27 partI{integer}
+8*43 ind{7I10}
+9K18 vector_i[39|3] 11r42 15|4r42
+10K18 vector_o[39|3] 11r66 15|4r66 5r10
+11v12*sliceVec 11>21 11>37 15|4b12 11t6
+11i21 partI{integer} 15|4b21 8r29
+11a37 vec{39|4A8[9]} 15|4b37 8r17
+14I10 Index 20r41 21r41
+15I10 IndexI 17r63 18r43
+16I10 IndexO 17r48 19r43
+17V19 convert{15I10} 17>27 17>43 15|18s29
+17i27 partI{integer}
+17*43 ind{16I10}
+18K18 vector_i_i[39|3] 20r48
+19K18 vector_i_o[39|3] 21r48
+20K18 matrix_i[16|5] 22r42 15|13r42
+21K18 matrix_o[16|5] 22r66 15|13r66 14r10
+22v12*sliceMat 22>21 22>37 15|13b12 22t6
+22i21 partI{integer} 15|13b21 18r37
+22a37 mat{16|7A8[20]} 15|13b37 18r22
+25I10 RowIndex1 30r40 32r41
+26I10 GenIndex 28r42 31r40
+27I10 ColIndex2 29r42
+28K18 vector_i1[39|3] 30r51
+29K18 vector_i2[39|3] 31r50 32r52
+30K18 matrix1[16|5] 33r24 15|24r23
+31K18 matrix2[16|5] 33r46 15|24r45
+32K18 matrix_o[16|5] 33r69 15|24r68 25r10
+33v13*mult 33>18 33>40 15|24b12 36t6
+33a18 mat1{16|7A8[30]} 15|24b17 31r36
+33a40 mat2{16|7A8[31]} 15|24b39 30r18 31r49
+36K18 matrix_i[16|5] 37r31 37r51 39r9 44r32 15|39r32
+37V19 newSize{integer} 37>27 37>47 42s40
+37*27 s1{16|3I8[36]}
+37*47 s2{39|2I8[16|4[14|36]]}
+38k11*merge_p 36z18 37z19 45l7 45e14 15|38b16 70l7 70t14
+42I13*IndexO{integer} 43r36
+43K13*vector_o[39|3] 44r56 15|39r56 42r12
+44V14*mergeVectors{39|4A8[43]} 44>27 15|39b14 69t8
+44a27 vec{16|7A8[36]} 15|39b27 48r21 52r18 54r18 55r27 57r24 60r23
+X 15 lib.adb
+5a5 res{39|4A8[14|10]} 7r14 8m7 10r12
+7i9 i 8r11 8r36
+14a5 res{16|7A8[14|21]} 16r14 17r16 18m9 21r12
+16i9 i 17r20 18r13 18r26
+17i11 j 18r16 18r44
+25a5 res{16|7A8[14|32]} 27r14 28r16 29m9 31m11 31r24 35r12
+27i9 i 28r20 29r13 31r15 31r28 31r41
+28i11 j 29r16 31r18 31r31 31r57
+30i13 k 31r44 31r54
+40a7 vec_i(39|2I8[16|4[14|36]]) 47r16 48m9 55r34 57r31 60r34 61r12 64m11
+. 64r27
+41a7 vec_b(boolean) 49m9 55r14 62m11
+42a7 res{39|4A8[14|43]} 51r16 60m9 68r14
+43i7 res_i{integer} 60r13 66m9 66r18
+44i7 min_val{integer} 53m9 55r46 57m13
+45*7 min_j{16|3I8[14|36]} 52m9 56m13 60r27 60r40 61r18 62r17 64r17 64r33
+47i11 i 48r15 48r25 49r15
+51i11 i{integer}
+54i13 j 55r20 55r31 55r40 56r22 57r28 57r37
+X 16 matrix.ads
+3I8 Index 14|37r40[36] 40r14[36] 42r48[36] 42r59[36] 15|40r21[14|36] 41r21[14|36]
+. 45r14[14|36] 45r23[14|36]
+4K16 vector_i[39|3] 14|37r60[36] 41r14[36] 42r72[36] 42r94[36] 15|40r31[14|36]
+. 61r27[14|36]
+5k9*matrix 14|3w6 20r34 21r34 30r33 31r33 32r34 36r34 16|14e11
+7A8 Matrix(39|4A8[14|18])<14|14I10> 14|22r51[20] 22r75[21] 33r32[30] 33r54[31]
+. 33r78[32] 44r41[36] 15|13r51[14|20] 13r75[14|21] 14r19[14|21] 24r31[14|30]
+. 24r53[14|31] 24r77[14|32] 25r19[14|32] 39r41[14|36]
+X 30 s-stausa.ads
+203U14*Initialize 204i<c,__gnat_stack_usage_initialize>22
+268U14*Output_Results 272i<c,__gnat_stack_usage_output_results>22
+X 39 vector.ads
+2I8 Index 14|37r69[16|4[14|36]] 41r23[16|4[14|36]] 42r81[16|4[14|36]] 42r103[16|4[14|36]]
+. 15|40r40[16|4[14|36]] 61r36[16|4[14|36]]
+3k9*vector 14|2w6 9r34 10r34 18r36 19r36 28r35 29r35 43r29 39|10e11
+4A8 Vector(integer)<14|15I10> 14|11r51[9] 11r75[10] 44r65[43] 15|4r51[14|9]
+. 4r75[14|10] 5r19[14|10] 39r65[14|43] 42r21[14|43]
+

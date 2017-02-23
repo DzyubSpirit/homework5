@@ -1,0 +1,66 @@
+V "GNAT Lib v6"
+P ZX
+
+RN
+RV NO_IO
+RV SPARK_05
+
+U vector%b		vector.adb		acd6be08 NE OO PK GE IL
+W ada%s			ada.ads			ada.ali
+W ada.text_io%s		a-textio.adb		a-textio.ali
+
+U vector%s		vector.ads		a62db341 BN EE NE OO PK GE IL
+
+D ada.ads		20160115095757 3ffc8e18 ada%s
+D a-except.ads		20160115095759 291912d5 ada.exceptions%s
+D a-ioexce.ads		20160115095800 e4a01f64 ada.io_exceptions%s
+D a-stream.ads		20160115095757 119b8fb3 ada.streams%s
+D a-tags.ads		20160115095758 01f5e3ef ada.tags%s
+D a-textio.ads		20160115095758 386df5d4 ada.text_io%s
+D a-unccon.ads		20160115095759 f9eb8f06 ada.unchecked_conversion%s
+D interfac.ads		20160115095759 4be8ce1b interfaces%s
+D i-cstrea.ads		20160115095758 e53d8b8e interfaces.c_streams%s
+D system.ads		20160115095759 6326c08a system%s
+D s-crtl.ads		20160115095757 0ebbdb71 system.crtl%s
+D s-exctab.ads		20160115095800 54135002 system.exception_table%s
+D s-ficobl.ads		20160115095800 078245e4 system.file_control_block%s
+D s-parame.ads		20160115095759 7e2a0d7f system.parameters%s
+D s-soflin.ads		20160115095759 14e1eb6c system.soft_links%s
+D s-stache.ads		20160115095759 a37c21ec system.stack_checking%s
+D s-stalib.ads		20160115095800 09bd3940 system.standard_library%s
+D s-stoele.ads		20160115095759 2dc34a04 system.storage_elements%s
+D s-traent.ads		20160115095759 005bf670 system.traceback_entries%s
+D s-unstyp.ads		20160115095759 9d58a4c0 system.unsigned_types%s
+D s-wchcon.ads		20160115095759 1b7d22d2 system.wch_con%s
+D vector.ads		20170223032224 a62db341 vector%s
+D vector.adb		20170222174841 3296f89d vector%b
+X 1 ada.ads
+16K9*Ada 19e8 23|1r6 1r23
+X 6 a-textio.ads
+49K13*Text_IO 471e16 23|1w10 1r27
+166U14*New_Line 23|41s5
+242U14*Put 23|38s7 39s7
+X 22 vector.ads
+2I8 Index 4r25 23|6r14
+3k9*vector 2z8 10l5 10e11 23|2b14 43l5 43t11
+4A8*Vector(integer)<2I8> 6r34 6r49 7r29 8r30 9r24 23|3r29 4r10 12r34 12r49
+. 13r10 21r30 35r24
+6V12*mult{4A8} 6>17 6>29 23|12b12 19t6
+6i17 k{integer} 23|12b17 16r17
+6a29 vec{4A8} 23|12b29 16r21
+7V12*oneVector{4A8} 23|3b12 10t6
+8U13*sort 8=18 23|21b13 33t6
+8a18 vec{4A8} 23|21b18 24r14 24r27 25r16 25r27 25r43 26r12 26r21 27r16 28m11
+. 28r21 29m11
+9U13*print 9>19 23|35b13 42t6
+9a19 vec{4A8} 23|35b19 37r14 38r25
+X 23 vector.adb
+4a5 res{22|4A8} 7m7 9r12
+6*9 i{22|2I8} 7r11
+13a5 res{22|4A8} 15r14 16m7 18r12
+15i9 i 16r11 16r25
+22i5 c{integer} 27m11 29r25
+24i9 i 25r39
+25i11 j 26r16 26r25 27r20 28r15 28r25 29r15
+37i9 i 38r29
+

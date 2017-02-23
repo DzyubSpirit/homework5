@@ -1,0 +1,82 @@
+V "GNAT Lib v6"
+P ZX
+
+RN
+RV NO_IO
+RV SPARK_05
+
+U matrix%b		matrix.adb		cd9ff0f8 NE OO PK GE IL
+W ada%s			ada.ads			ada.ali
+W ada.integer_text_io%s	a-inteio.ads		a-inteio.ali
+W ada.text_io%s		a-textio.adb		a-textio.ali
+
+U matrix%s		matrix.ads		41127a3c BN EE NE OO PK GE IL
+W vector%s		vector.adb		vector.ali
+
+D ada.ads		20160115095757 3ffc8e18 ada%s
+D a-except.ads		20160115095759 291912d5 ada.exceptions%s
+D a-inteio.ads		20160115095800 f64b89a4 ada.integer_text_io%s
+D a-ioexce.ads		20160115095800 e4a01f64 ada.io_exceptions%s
+D a-stream.ads		20160115095757 119b8fb3 ada.streams%s
+D a-tags.ads		20160115095758 01f5e3ef ada.tags%s
+D a-textio.ads		20160115095758 386df5d4 ada.text_io%s
+D a-tiinio.ads		20160115095757 aa04e5d6 ada.text_io.integer_io%s
+D a-unccon.ads		20160115095759 f9eb8f06 ada.unchecked_conversion%s
+D interfac.ads		20160115095759 4be8ce1b interfaces%s
+D i-cstrea.ads		20160115095758 e53d8b8e interfaces.c_streams%s
+D matrix.ads		20170223054117 e73fc97d matrix%s
+D matrix.adb		20170222175307 e48645f5 matrix%b
+D system.ads		20160115095759 6326c08a system%s
+D s-crtl.ads		20160115095757 0ebbdb71 system.crtl%s
+D s-exctab.ads		20160115095800 54135002 system.exception_table%s
+D s-ficobl.ads		20160115095800 078245e4 system.file_control_block%s
+D s-parame.ads		20160115095759 7e2a0d7f system.parameters%s
+D s-soflin.ads		20160115095759 14e1eb6c system.soft_links%s
+D s-stache.ads		20160115095759 a37c21ec system.stack_checking%s
+D s-stalib.ads		20160115095800 09bd3940 system.standard_library%s
+D s-stoele.ads		20160115095759 2dc34a04 system.storage_elements%s
+D s-traent.ads		20160115095759 005bf670 system.traceback_entries%s
+D s-unstyp.ads		20160115095759 9d58a4c0 system.unsigned_types%s
+D s-wchcon.ads		20160115095759 1b7d22d2 system.wch_con%s
+D vector.ads		20170223032224 a62db341 vector%s
+X 1 ada.ads
+16K9*Ada 19e8 13|1r6 1r23 2r6 2r31
+X 3 a-inteio.ads
+18K13*Integer_Text_IO[8|46] 13|2w10 2r35
+X 7 a-textio.ads
+49K13*Text_IO 471e16 13|1w10 1r27
+X 12 matrix.ads
+3I8 Index 7r25 13|7r14
+4K16 vector_i[26|3] 6r7 7r35 11r28 12r41 13|13r28 35r41 36r10 47r7
+5k9*matrix 3z8 4z16 14l5 14e11 13|3b14 50l5 50t11
+7A8*Matrix(26|4A8[4])<3I8> 9r22 9r36 9r51 10r29 11r52 12r26 13r24 13|4r29
+. 5r10 13r52 14r10 24r22 24r36 24r51 25r10 35r26 44r24
+9V12*sum{7A8} 9>16 9>30 13|24b12 33t6
+9a16 mat1{7A8} 13|24b16 29r22
+9a30 mat2{7A8} 13|24b30 29r35
+10V12*oneMatrix{7A8} 13|4b12 11t6
+11V12*fromVector{7A8} 11>23 13|13b12 22t6
+11a23 vec{26|4A8[4]} 13|13b23 18r22
+12V12*toVector{26|4A8[4]} 12>21 13|35b12 42t6
+12a21 mat{7A8} 13|35b21 39r17 39r21
+13U13*print 13>19 13|44b13 49t6
+13a19 mat{7A8} 13|44b19 46r14 47r22
+X 13 matrix.adb
+5a5 res{12|7A8} 8m7 10r12
+7*9 i{12|3I8} 8r11
+14a5 res{12|7A8} 16r14 17r16 18m9 21r12
+16i9 i 17r20 18r13
+17i11 j 18r16 18r26
+25a5 res{12|7A8} 27r14 28r16 29m9 32r12
+27i9 i 28r20 29r13 29r27 29r40
+28i11 j 29r16 29r30 29r43
+36a5 res{26|4A8[12|4]} 38r14 39m7 41r12
+38i9 i 39r11 39r32
+46i9 i 47r26
+X 26 vector.ads
+3k9*vector 12|1w6 4r32 26|10e11
+4A8 Vector(integer)<2I8[12|4]> 12|7r44[4] 11r37[4] 12r50[4] 13|13r37[12|4]
+. 35r50[12|4] 36r19[12|4]
+7V12 oneVector{4A8[12|4]} 13|8s17[12|4]
+9U13 print 13|47s16[12|4]
+
