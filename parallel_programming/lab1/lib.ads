@@ -1,7 +1,18 @@
+--------------------------------------------------------------------------------
+-- lib
+-- Purpose:
+--   Using functions linked to work with vector or matrixes with different
+--   indexes.
+--------------------------------------------------------------------------------
 with Ada.Synchronous_Task_Control; use Ada.Synchronous_Task_Control;
 with vector;
 with matrix;
 package lib is
+  ------------------------------------------------------------------------------
+  -- sliceVec
+  -- Purpose:
+  --   Get i-th part of vector.
+  ------------------------------------------------------------------------------
   generic
     type IndexI is range <>;
     type IndexO is range <>;
@@ -10,6 +21,11 @@ package lib is
     with package vector_o is new vector(IndexO);
   function sliceVec(partI: Integer; vec: vector_i.Vector) return vector_o.Vector;
 
+  ----------------------------------------------------------------------------------------- 
+  -- sliceMat
+  -- Purpose:
+  --   Get i-th part of matrix. Matrix slices by columns (height stays the same).
+  ----------------------------------------------------------------------------------------- 
   generic
     type Index is range <>;
     type IndexI is range <>;
@@ -32,6 +48,12 @@ package lib is
     with package matrix_o is new matrix(RowIndex1, vector_i2);
    function mult(mat1: matrix1.Matrix; mat2: matrix2.Matrix) return matrix_o.Matrix;
 
+
+  ----------------------------------------------------------------------------------------- 
+  -- merge_p
+  -- Purpose:
+  --   Merge matrix's sorted vectors into one big sorted vector
+  ----------------------------------------------------------------------------------------- 
   generic
     with package matrix_i is new matrix(<>);
     with function newSize(s1: matrix_i.Index; s2: matrix_i.vector_i.Index) return Integer;
@@ -44,4 +66,3 @@ package lib is
     function mergeVectors(vec: matrix_i.Matrix) return vector_o.Vector;
   end merge_p;
 end lib;
-

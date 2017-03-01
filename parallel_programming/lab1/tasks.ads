@@ -1,3 +1,8 @@
+--------------------------------------------------------------------------------
+-- tasks
+-- Purpose:
+--   Using task type for calculating vector part
+--------------------------------------------------------------------------------
 with Ada.Synchronous_Task_Control; use Ada.Synchronous_Task_Control;
 with vector;
 with matrix;

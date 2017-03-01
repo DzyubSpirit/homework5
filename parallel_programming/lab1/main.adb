@@ -1,3 +1,10 @@
+--------------------------------------------------------------------------------
+-- main
+-- Author:
+--   Dzyuba Vlad, IP-42
+-- Purpose:
+--   Parallel calculating of operations with numbers, vectors and matricies.
+--------------------------------------------------------------------------------
 with Ada.Text_IO; use Ada.Text_IO;
 with Ada.Synchronous_Task_Control; use Ada.Synchronous_Task_Control;
 with lib; use lib;
@@ -6,10 +13,15 @@ with calc_p;
 with matrix;
 with vector;
 procedure main is
+  -- Output vector size
   N: constant Integer := 6;
+  -- Number of processors
   P: constant Integer := 3;
+  -- Size of one vector part
   pSize: constant Integer := N / P;
+  -- MK row width and MR column height
   N2: Integer := 4;
+  -- Vector T width
   N3: Integer := 5;
   subtype IndexZ is Integer range 0..N-1;
   subtype IndexT is Integer range 0..N3-1;
@@ -19,16 +31,19 @@ procedure main is
   package vectorK is new vector(IndexKR);
   package matrixK is new matrix(IndexT, VectorK);
   package matrixR is new matrix(IndexKR, vectorZ);
+  -- Vector and matrix types for part formula
   subtype IndexPart is IndexZ range 0..pSize-1;
   package vectorZh is new vector(IndexPart);
   subtype VecIndex is Integer range 0..0;
   package matrixZh is new matrix(VecIndex, VectorZh);
   package matrixRh is new matrix(IndexKR, VectorZh);
+  -- Input number, vectors and matricies
   e: Integer := 1;
   Z: vectorZ.Vector := vectorZ.oneVector;
   T: vectorT.Vector := vectorT.oneVector;
   MK: matrixK.Matrix := matrixK.oneMatrix;
   MR: matrixR.Matrix := matrixR.oneMatrix;
+  -- Parted vectors and matricies
   subtype PIndex is Integer range 0..P-1;
   Zhs: array (PIndex) of vectorZh.Vector;
   MRhs: array (PIndex) of matrixRh.Matrix;
