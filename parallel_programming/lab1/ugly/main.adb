@@ -8,12 +8,12 @@
 with Ada.Text_IO; use Ada.Text_IO;
 with Ada.Synchronous_Task_Control; use Ada.Synchronous_Task_Control;
 procedure main is
-  N: constant Integer := 10;
+  N: constant Integer := 500;
   subtype Index is Integer range 0..N-1;
   type Vector is array (Index) of Integer;
   type Matrix is array (Index) of Vector;
 
-  sem1, sem2: Suspension_Object;
+  sem1, sem2, semr: Suspension_Object;
   e: Integer;
   Z, T: Vector;
   MK, MR: Matrix;
@@ -35,6 +35,8 @@ procedure main is
     TKR: VectorH;
     i, j: Integer;
   begin
+		-- Initializing semaphore to global resource
+		Set_True(semr);
     -- Reading
     e := 1;
     for i in Index loop
@@ -45,12 +47,14 @@ procedure main is
         MR(i)(j) := 1;
       end loop;
     end loop;
+    -- Signal about end of input to T2
+    Set_True(sem1);
     -- Copying
+		Suspend_Until_True(semr);
     e1 := e;
     T1 := T;
     MK1 := MK;
-    -- Signal about copying end to T2
-    Set_True(sem1);
+		Set_True(semr);
     -- Calculate MKR
     for i in Index loop
       for j in PartedIndex loop
@@ -119,12 +123,14 @@ procedure main is
     -- Result of multiplication of T and MKR
     TKR: VectorH;
   begin
-    -- Wait signal about copying finish from T1
+    -- Wait signal about input end from T1
     Suspend_Until_True(sem1);
     -- Copying
+		Suspend_Until_True(semr);
     e2 := e;
     T2 := T;
     MK2 := MK;
+		Set_True(semr);
     -- Calculate MKR
     for i in Index loop
       for j in PartedIndex loop
