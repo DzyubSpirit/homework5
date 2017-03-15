@@ -103,11 +103,13 @@ procedure main is
 		    i := i + 1;
 		  end loop;
 		  -- Print A
-		  for i in Index loop
-		    Put(Integer'Image(A(i)));
-		    Put(" ");
-		  end loop;
-		  New_Line;
+			if Index'Last - Index'First < 20 then
+			  for i in Index loop
+			    Put(Integer'Image(A(i)));
+			    Put(" ");
+			  end loop;
+			  New_Line;
+			end if;
 		end;
   	task T2;
   	task body T2 is
