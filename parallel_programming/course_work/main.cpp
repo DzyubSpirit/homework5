@@ -36,12 +36,12 @@ int main() {
 			case 0: {
 				Z = readVec();
 				MO = readMat();
-			} break;
+			}
 			case P-1: {
 				E = readVec();
 				S = readVec();
 				MT = readMat();
-			} break;
+			}
 		}
 		// finding maximum of Z
 		#pragma omp barrier
