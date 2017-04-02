@@ -6,12 +6,20 @@
 #include <iostream>
 #include <omp.h>
 #include <string.h>
+#include <stdlib.h>
+#include <sys/time.h>
+
+typedef unsigned long long timestamp_t;
+
+timestamp_t get_timestamp () {
+	struct timeval now;
+	gettimeofday (&now, NULL);
+	return  now.tv_usec + (timestamp_t)now.tv_sec * 1000000;
+}
 
 using namespace std;
 
-#define N 10
-#define P 2
-#define H N/P
+int N, P, H;
 
 // functions for generating structures
 int* readVec();
@@ -20,7 +28,10 @@ int* readMat();
 int* veccpy(int *src);
 int* matcpy(int *src);
 
-int main() {
+int main(int argc, char* argv[]) {
+	N = atoi(argv[1]);
+	P = atoi(argv[2]);
+	H = N / P;
 	// input data
 	int *Z, *MO, *E, *S, *MT;
 	// output data
@@ -28,20 +39,19 @@ int main() {
 
 	// intermidiate data
 	int z = -65536, *B = new int[N], *C = new int[N];
+	timestamp_t startTime = get_timestamp();
 	#pragma omp parallel num_threads(P)
 	{
 		int tid = omp_get_thread_num();
 		// generate data if first or last thread
-		switch (tid) {
-			case 0: {
-				Z = readVec();
-				MO = readMat();
-			}
-			case P-1: {
-				E = readVec();
-				S = readVec();
-				MT = readMat();
-			}
+		if (tid == 0) {
+			Z = readVec();
+			MO = readMat();
+		}
+		if (tid == P - 1) {
+			E = readVec();
+			S = readVec();
+			MT = readMat();
 		}
 		// finding maximum of Z
 		#pragma omp barrier
@@ -121,10 +131,15 @@ int main() {
 		}
 	}
 	// print A
-	for (int i = 0; i < N; i++) {
-		cout << A[i] << " ";
+	if (N <= 20) {
+		for (int i = 0; i < N; i++) {
+			cout << A[i] << " ";
+		}
+		cout << endl;
+	} else {
+		timestamp_t endTime = get_timestamp();
+		cout << (endTime - startTime) / 1000000.0 << endl;
 	}
-	cout << endl;
 	delete[] A;
 }
 
