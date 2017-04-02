@@ -1,3 +1,8 @@
+/*
+// main
+// Author:
+//    Dzyuba Vlad, IP-42
+*/
 #include <windows.h>
 #include <iostream>
 
@@ -83,6 +88,9 @@ int main()
 	}
 
 	DeleteCriticalSection(&CriticalSection);
+	CloseHandle(DCalc);
+	CloseHandle(Calc);
+	CloseHandle(ghMutex);
 	for (int i = 0; i < THREADCOUNT-1; i++)
 	{
 		CloseHandle(threads[i]);
