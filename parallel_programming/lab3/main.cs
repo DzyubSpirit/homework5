@@ -1,3 +1,8 @@
+/*
+// main
+// Author:
+//    Dzyuba Vlad, IP-42
+*/
 using System;
 using System.Threading;
 
