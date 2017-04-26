@@ -78,8 +78,6 @@ procedure main is
     end;
   end;
 
-  package PIntegerPkg is new PItemPkg(Integer);
-  subtype PInteger is PIntegerPkg.PItem;
   package PVectorPkg is new PItemPkg(Vector);
   subtype PVector is PVectorPkg.PItem;
   package PMatrixPkg is new PItemPkg(Matrix);
@@ -137,12 +135,20 @@ procedure main is
       MXi: Matrix;
     begin
       ZIsRead.Wait;
-      CIsRead.Wait;
-      BIsRead.Wait;
+      zIntI := Integer'First;
       for i in index*H+1..(index + 1)*H loop
-        zInt.Max(Z(i));
-        d.Add(B(i) * C(i));
+        if Z(i) > zIntI then
+          zIntI := Z(i);
+        end if;
       end loop;
+      zInt.Max(zIntI);
+      BIsRead.Wait;
+      CIsRead.Wait;
+      dI := 0;
+      for i in index*H+1..(index + 1)*H loop
+        dI := dI + B(i) * C(i);
+      end loop;
+      d.Add(dI);
       zdCalculationEnd.Add;
       zdCalculationEnd.Wait;
       zIntI := zInt.Read;
