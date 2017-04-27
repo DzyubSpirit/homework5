@@ -57,15 +57,15 @@ procedure main is
     end;
   end;
 
-  protected type PMaximizer is
-    procedure Max(x: Integer);
+  protected type PMinimizer is
+    procedure Min(x: Integer);
     function Read return Integer;
     private
       i: Integer := 0;
   end;
 
-  protected body PMaximizer is
-    procedure Max(x: Integer) is
+  protected body PMinimizer is
+    procedure Min(x: Integer) is
     begin
       if x > i then
         i := x;
@@ -83,7 +83,7 @@ procedure main is
   package PMatrixPkg is new PItemPkg(Matrix);
   subtype PMatrix is PMatrixPkg.PItem;
 
-  zInt: PMaximizer;
+  zInt: PMinimizer;
   d: PCounter;
   B, C, Z: Vector;
   MX: PMatrix;
@@ -135,13 +135,13 @@ procedure main is
       MXi: Matrix;
     begin
       ZIsRead.Wait;
-      zIntI := Integer'First;
+      zIntI := Integer'Last;
       for i in index*H+1..(index + 1)*H loop
-        if Z(i) > zIntI then
+        if Z(i) < zIntI then
           zIntI := Z(i);
         end if;
       end loop;
-      zInt.Max(zIntI);
+      zInt.Min(zIntI);
       BIsRead.Wait;
       CIsRead.Wait;
       dI := 0;
