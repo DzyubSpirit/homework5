@@ -1,5 +1,7 @@
 #include <iostream>
 #include <mpi.h>
+#include <string.h>
+#include <stdlib.h>
 #include <sys/time.h>
 
 using namespace std;
