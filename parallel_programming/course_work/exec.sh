@@ -1,1 +1,1 @@
-mpirun -N 10 main2
+mpirun -N 10 main2 100

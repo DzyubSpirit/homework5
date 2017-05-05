@@ -41,7 +41,6 @@ int main(int argc, char* argv[]) {
   MPI_Init(&argc, &argv);
   MPI_Comm_size(MPI_COMM_WORLD, &P);
 	N = atoi(argv[1]);
-	P = atoi(argv[2]);
   H = N / P;
   mid = P / 2;
   quarter = mid / 2;
