@@ -3,6 +3,6 @@ do
 	for j in `seq 10 -2 4`;
 	do
 		echo $i $j
-		sh exec.sh $((i*900)) $j >> results2.txt
+		sh exec.sh $((i*1200)) $j >> results2.txt
 	done;
 done;
