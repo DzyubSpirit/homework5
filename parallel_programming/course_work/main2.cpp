@@ -12,7 +12,6 @@ timestamp_t get_timestamp () {
 	return  now.tv_usec + (timestamp_t)now.tv_sec * 1000000;
 }
 
-#define N 100
 #define EDGE_COUNT (2 * (P - 1))
 #define ZH_SENDING 0
 #define SH_SENDING 1
@@ -30,6 +29,7 @@ void mergeSend(int rank, MPI_Comm graph_comm, int *Z, int *S, int *maxZ);
 void maxSort(int &maxZ, int* Z, int* S);
 int* mergeN(int n, int lengths[], int* arrays[]);
 
+int N;
 int P;
 int H;
 int mid;
@@ -38,6 +38,8 @@ int quarter;
 int main(int argc, char* argv[]) {
   MPI_Init(&argc, &argv);
   MPI_Comm_size(MPI_COMM_WORLD, &P);
+	N = atoi(argv[1]);
+	P = atoi(argv[2]);
   H = N / P;
   mid = P / 2;
   quarter = mid / 2;
