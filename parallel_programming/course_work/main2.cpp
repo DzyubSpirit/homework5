@@ -312,17 +312,17 @@ void mergeSend(int rank, MPI_Comm graph_comm, int *Z, int *S, int *maxZP) {
     MPI_Send(merged, mergedSize, MPI_INT, targetRank, SORTED_S, graph_comm);
 
 
-    if (mid & 1 == 0 && (rank == quarter - 1 || rank == quarter)) {
+    if ((mid & 1) == 0 && (rank == quarter - 1 || rank == quarter)) {
       int maxAnotherZ;
       MPI_Recv(&maxAnotherZ, 1, MPI_INT, targetRank, MAX_Z, graph_comm, &status);
       if (maxAnotherZ > maxZ) {
         maxZ = maxAnotherZ;
       }
       int *sortedS2 = new int[mid * H];
-      MPI_Recv(&sortedS2, mid * H, MPI_INT, targetRank, SORTED_S, graph_comm, &status);
+      MPI_Recv(sortedS2, mid * H, MPI_INT, targetRank, SORTED_S, graph_comm, &status);
 
       int* totalS;
-      int lengths[] = { mergedSize, mergedSize };
+      int lengths[] = { mid * H, mid * H };
       int* arrays[] = { merged, sortedS2 };
       totalS = mergeN(2, lengths, arrays);
       *maxZP = maxZ;
@@ -330,24 +330,29 @@ void mergeSend(int rank, MPI_Comm graph_comm, int *Z, int *S, int *maxZP) {
         for (int i = 0; i < quarter - 1; i++) {
           MPI_Send(maxZP, 1, MPI_INT, i, TOTAL_MAX_Z, graph_comm);
           MPI_Send(totalS + i * H, H, MPI_INT, i, PART_C, graph_comm);
-          MPI_Send(maxZP, 1, MPI_INT, i + mid, TOTAL_MAX_Z, graph_comm);
-          MPI_Send(totalS + (i + mid) * H, H, MPI_INT, i + mid, PART_C, graph_comm);
+        }
+        for (int i = mid; i < mid + quarter; i++) {
+          MPI_Send(maxZP, 1, MPI_INT, i, TOTAL_MAX_Z, graph_comm);
+          MPI_Send(totalS + i * H, H, MPI_INT, i, PART_C, graph_comm);
         }
       } else {
         for (int i = quarter + 1; i < mid; i++) {
           MPI_Send(maxZP, 1, MPI_INT, i, TOTAL_MAX_Z, graph_comm);
           MPI_Send(totalS + i * H, H, MPI_INT, i, PART_C, graph_comm);
-          MPI_Send(maxZP, 1, MPI_INT, i + mid, TOTAL_MAX_Z, graph_comm);
-          MPI_Send(totalS + (i + mid) * H, H, MPI_INT, i + mid, PART_C, graph_comm);
+        }
+        for (int i = mid + quarter; i < P; i++) {
+          MPI_Send(maxZP, 1, MPI_INT, i, TOTAL_MAX_Z, graph_comm);
+          MPI_Send(totalS + i * H, H, MPI_INT, i, PART_C, graph_comm);
         }
       }
       for (int i = 0; i < H; i++) {
-        S[i] = merged[i + rank * H];
+        S[i] = totalS[i + rank * H];
       }
 
       delete[] merged;
       delete[] totalS;
       delete[] sortedS2;
+      return;
     }
     delete[] sortedS3;
   } else {
@@ -362,7 +367,7 @@ void mergeSend(int rank, MPI_Comm graph_comm, int *Z, int *S, int *maxZP) {
   }
   delete[] sortedS2;
   
-  int sortedSourceRank = mid & 1 == 0
+  int sortedSourceRank = (mid & 1) == 0
     ? rank < quarter ? quarter - 1 : quarter
     : quarter;
   MPI_Recv(maxZP, 1, MPI_INT, sortedSourceRank, TOTAL_MAX_Z, graph_comm, &status);
