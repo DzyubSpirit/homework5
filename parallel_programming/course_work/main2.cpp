@@ -162,7 +162,7 @@ void mpiRun(MPI_Comm &graph_comm, MPI_Comm &topo_comm, int* index, int* edges) {
     maxSort(maxZ, Z, S);
 
     int rank1 = rank < mid ? rank : rank - mid;
-    int sourceRank = mid & 1 ? quarter : rank1 < quarter ? quarter - 1 : quarter;
+    int sourceRank = (mid & 1) ? quarter : rank1 < quarter ? quarter - 1 : quarter;
 
     if (rank < mid) {
       mergeSend(rank, graph_comm, Z, S, &maxZ);
@@ -270,7 +270,7 @@ void mergeSend(int rank, MPI_Comm graph_comm, int *Z, int *S, int *maxZP) {
     MPI_Recv(sortedS3, sortedSSize, MPI_INT, sourceRank,
         SORTED_S, graph_comm, &status);
 
-    if (mid & 1 == 1 && rank == quarter) {
+    if ((mid & 1) == 1 && rank == quarter) {
       int maxAnotherZ;
       MPI_Recv(&maxAnotherZ, 1, MPI_INT, targetRank, MAX_Z, graph_comm, &status);
       if (maxAnotherZ > maxZ) {
