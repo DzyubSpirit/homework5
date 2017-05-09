@@ -195,7 +195,6 @@ void mpiRun(MPI_Comm &graph_comm, MPI_Comm &topo_comm, int* index, int* edges) {
     }
   }
 
-  MPI_Send(Ah, H, MPI_INT, mid - 1, AH_SENDING, graph_comm);
 
   if (rank == mid - 1) {
     int *A = new int[N];
@@ -218,6 +217,8 @@ void mpiRun(MPI_Comm &graph_comm, MPI_Comm &topo_comm, int* index, int* edges) {
 
     }
     delete[] A;
+  } else {
+    MPI_Send(Ah, H, MPI_INT, mid - 1, AH_SENDING, graph_comm);
   }
   
   delete[] Ei;
@@ -305,21 +306,31 @@ void mergeSend(int rank, MPI_Comm graph_comm, int *Z, int *S, int *maxZP) {
     int* arrays[] = { S, sortedS2, sortedS3 };
     merged = mergeN(3, lengths, arrays);
     int anotherMaxZ;
-    MPI_Send(&anotherMaxZ, 1, MPI_INT, targetRank, MAX_Z, graph_comm);
-    if (anotherMaxZ > maxZ) {
-      maxZ = anotherMaxZ;
-    }
-    MPI_Send(merged, mergedSize, MPI_INT, targetRank, SORTED_S, graph_comm);
-
 
     if ((mid & 1) == 0 && (rank == quarter - 1 || rank == quarter)) {
       int maxAnotherZ;
-      MPI_Recv(&maxAnotherZ, 1, MPI_INT, targetRank, MAX_Z, graph_comm, &status);
-      if (maxAnotherZ > maxZ) {
-        maxZ = maxAnotherZ;
-      }
       int *sortedS2 = new int[mid * H];
-      MPI_Recv(sortedS2, mid * H, MPI_INT, targetRank, SORTED_S, graph_comm, &status);
+
+      if (rank == quarter) {
+        MPI_Send(&anotherMaxZ, 1, MPI_INT, targetRank, MAX_Z, graph_comm);
+        MPI_Send(merged, mergedSize, MPI_INT, targetRank, SORTED_S, graph_comm);
+
+        MPI_Recv(&maxAnotherZ, 1, MPI_INT, targetRank, MAX_Z, graph_comm, &status);
+        if (maxAnotherZ > maxZ) {
+          maxZ = maxAnotherZ;
+        }
+        MPI_Recv(sortedS2, mid * H, MPI_INT, targetRank, SORTED_S, graph_comm, &status);
+
+      } else {
+        MPI_Recv(&maxAnotherZ, 1, MPI_INT, targetRank, MAX_Z, graph_comm, &status);
+        if (maxAnotherZ > maxZ) {
+          maxZ = maxAnotherZ;
+        }
+        MPI_Recv(sortedS2, mid * H, MPI_INT, targetRank, SORTED_S, graph_comm, &status);
+
+        MPI_Send(&anotherMaxZ, 1, MPI_INT, targetRank, MAX_Z, graph_comm);
+        MPI_Send(merged, mergedSize, MPI_INT, targetRank, SORTED_S, graph_comm);
+      }
 
       int* totalS;
       int lengths[] = { mid * H, mid * H };
@@ -354,6 +365,9 @@ void mergeSend(int rank, MPI_Comm graph_comm, int *Z, int *S, int *maxZP) {
       delete[] sortedS2;
       return;
     }
+    MPI_Send(&anotherMaxZ, 1, MPI_INT, targetRank, MAX_Z, graph_comm);
+    MPI_Send(merged, mergedSize, MPI_INT, targetRank, SORTED_S, graph_comm);
+
     delete[] sortedS3;
   } else {
     int lengths[] = { H, H };
