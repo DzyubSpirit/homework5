@@ -81,10 +81,10 @@ void mpiRun(MPI_Comm &graph_comm, MPI_Comm &topo_comm, int* index, int* edges) {
   }
 
   for (int i = 0; i < mid - 1; i++) {
-    edges[i * 2] = i;
-    edges[i * 2 + 1] = i + 1;
-    edges[i * 2 + 2] = i;
-    edges[i * 2 + 3] = mid + i;
+    edges[i * 4] = i;
+    edges[i * 4 + 1] = i + 1;
+    edges[i * 4 + 2] = i;
+    edges[i * 4 + 3] = mid + i;
   }
   edges[EDGE_COUNT - 2] = mid - 1;
   edges[EDGE_COUNT - 2] = P - 1;
