@@ -35,10 +35,27 @@ public class Main {
 
   private static Runnable[] calculations = new Runnable[P];
 
+  private static final IntBinaryOperator minZ = (begin, end) -> {
+    int min = Integer.MAX_VALUE;
+    for (int i = begin; i < end; i++) {
+      min = Math.min(min, Z[i]);
+    }
+    return min;
+  };
+
+  private static final IntBinaryOperator sumBC = (begin, end) -> {
+    int sum = 0;
+    for (int i = begin; i < end; i++) {
+      sum += B[i] * C[i];
+    }
+    return sum;
+  };
+
+
   private static final ForkJoinTask<Integer> minimizer =
-    new ArraySplitTask((x, y) -> (x < y ? x : y), Integer.MAX_VALUE, 0, N).task;
+    new ArraySplitTask(Math::min, minZ, 0, N).task;
   private static final ForkJoinTask<Integer> summator =
-    new ArraySplitTask((x, y) -> (x + y), 0, 0, N).task;
+    new ArraySplitTask((x, y) -> (x + y), sumBC, 0, N).task;
 
   static {
     MA = new int[N][];
@@ -54,11 +71,13 @@ public class Main {
     calculations[0] = new ReadCalculation(calculations[0], new Read1());
     calculations[1] = new ReadCalculation(calculations[1], new Read2());
     calculations[2] = new ReadCalculation(calculations[2], new Read3());
-    calculations[5] = new ReadCalculation(calculations[5], new Read6());
-    calculations[5] = new WriteCalculation(calculations[5], new Write6());
-    for (int i = 0; i < P; i++) {
+    calculations[5] = new ReadWriteCalculation(calculations[5], new Read6(), new Write6());
+
+    for (int i = 0; i < P-1; i++) {
       new Thread(calculations[i]).start();
     }
+    Thread lastThread = new Thread(calculations[P-1]);
+    lastThread.start();
 
     ForkJoinPool.commonPool().execute(ForkJoinTask.adapt(() -> {
       ForkJoinTask<?> t1 = ForkJoinTask.adapt(() -> {
@@ -84,6 +103,12 @@ public class Main {
       t2.join();
       zdIsCalculated.release(P);
     }));
+
+    try {
+      lastThread.join();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
   }
 
   static class Calculation implements Runnable {
@@ -141,12 +166,13 @@ public class Main {
 
   static class ArraySplitTask {
     private IntBinaryOperator op;
-    private int zero;
+    private IntBinaryOperator opChunk;
     public Recurser task;
 
-    public ArraySplitTask(IntBinaryOperator op, int zero, int begin, int end) {
+    public ArraySplitTask(IntBinaryOperator op,
+        IntBinaryOperator opChunk, int begin, int end) {
       this.op = op;
-      this.zero = zero;
+      this.opChunk = opChunk;
       this.task = new Recurser(begin, end);
     }
 
@@ -162,11 +188,7 @@ public class Main {
 
       protected Integer compute() {
         if (end - begin <= H) {
-          int z = zero;
-          for (int zi: Z) {
-            z = op.applyAsInt(z, zi);
-          }
-          return Z[begin];
+          return opChunk.applyAsInt(begin, end);
         }
         int mid = (begin + end) / 2;
         Recurser t1 = new Recurser(begin, mid);
@@ -249,18 +271,18 @@ public class Main {
     }
   }
 
-  static class WriteCalculation implements Runnable {
+  static class ReadWriteCalculation implements Runnable {
     private Runnable writer;
-    private Runnable calculation;
+    private ReadCalculation readCalculation;
 
-    public WriteCalculation(Runnable calculation, Runnable writer) {
-      this.calculation = calculation;
+    public ReadWriteCalculation(Runnable calculation, Runnable reader, Runnable writer) {
+      this.readCalculation = new ReadCalculation(calculation, reader);
       this.writer = writer;
     }
 
     @Override
     public void run() {
-      calculation.run();
+      readCalculation.run();
       writer.run();
     }
   }
