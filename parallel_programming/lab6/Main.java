@@ -8,21 +8,20 @@ import java.util.concurrent.ForkJoinTask;
 import java.util.function.IntBinaryOperator;
 
 public class Main {
-  private static final int N = 800;
+  private static final int N = 8;
   private static final int P = 8;
   private static final int H = N / P;
 
 
+  private static DataZD zd = new DataZD();
   private static int[] Z;
   private static Semaphore ZIsRead = new Semaphore(0);
-  private static Integer z;
   private static int[][] MO;
   private static Semaphore MOIsRead = new Semaphore(0);
   private static int[] B;
   private static Semaphore BIsRead = new Semaphore(0);
   private static int[] C;
   private static Semaphore CIsRead = new Semaphore(0);
-  private static Integer d;
   private static int[][] MX;
   private static Semaphore MXIsRead = new Semaphore(0);
   private static int[][] ME;
@@ -64,6 +63,27 @@ public class Main {
     }
   }
 
+  public static class DataZD {
+    private int z;
+    private int d;
+
+    public synchronized void setZ(int z) {
+      this.z = z;
+    }
+    
+    public synchronized void setD(int d) {
+      this.d = d;
+    }
+
+    public synchronized int getZ() {
+      return z;
+    }
+
+    public synchronized int getD() {
+      return d;
+    }
+  }
+
   public static void main(String... args) {
     for (int i = 0; i < P; i++) {
       calculations[i] = new Calculation(i);
@@ -86,7 +106,7 @@ public class Main {
         } catch (Exception e) {
           e.printStackTrace();
         }
-        z = minimizer.invoke();
+        zd.setZ(minimizer.invoke());
       });
       ForkJoinTask<?> t2 = ForkJoinTask.adapt(() -> {
         try {
@@ -95,7 +115,7 @@ public class Main {
         } catch (Exception e) {
           e.printStackTrace();
         }
-        d = summator.invoke();
+        zd.setD(summator.invoke());
       });
       t1.fork();
       t2.fork();
@@ -127,20 +147,27 @@ public class Main {
       }
       int zi, di;
       int[][] MXi;
-      synchronized (z) {
-        zi = z;
-      }
-      synchronized (d) {
-        di = d;
+      zi = zd.getZ();
+      di = zd.getD();
+      try {
+        MXIsRead.acquire();
+      } catch (Exception e) {
+        e.printStackTrace();
       }
       synchronized (MX) {
         MXi = MX;
+      }
+      try {
+        MOIsRead.acquire();
+        MEIsRead.acquire();
+      } catch (Exception e) {
+        e.printStackTrace();
       }
       for (int i = index * H; i < (index + 1) * H; i++) {
         for (int j = 0; j < N; j++) {
           MA[j][i] = zi * MO[j][i];
           for (int k = 0; k < N; k++) {
-            MA[j][i] += di * MX[j][k] * ME[k][i];
+            MA[j][i] += di * MXi[j][k] * ME[k][i];
           }
         }
       }
